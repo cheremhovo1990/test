@@ -10,14 +10,14 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ mix('/build/js/app.js', 'build') }}" defer></script>
+    <script src="{{ mix('js/app.js', 'build') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ mix('/build/css/app.css', 'build') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css', 'build') }}" rel="stylesheet">
 </head>
 <body>
 <div id="app">
