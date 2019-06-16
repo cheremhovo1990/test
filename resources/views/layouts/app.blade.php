@@ -80,6 +80,7 @@
 <main class="app-content py-3">
     <div class="container">
         @yield('breadcrumbs')
+        @yield('layouts/partials/flash')
         @yield('content')
     </div>
     </main>
