@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Adverts</title>
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js', 'build') }}" defer></script>
@@ -19,12 +19,12 @@
     <!-- Styles -->
     <link href="{{ mix('css/app.css', 'build') }}" rel="stylesheet">
 </head>
-<body>
-<div id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<body id="app">
+<header>
+    <nav class="navbar navbar-expand-md navbar-light bg-dark">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+                Adverts
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -61,7 +61,7 @@
                                 <a class="dropdown-item" href="{{route('cabinet')}}">Cabinet</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                         document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
 
@@ -76,10 +76,18 @@
             </div>
         </div>
     </nav>
-
-    <main class="py-4">
+</header>
+<main class="app-content py-3">
+    <div class="container">
         @yield('content')
+    </div>
     </main>
-</div>
+<footer>
+    <div class="container">
+        <div class="border-top pt-3">
+            <p>&copy; {{ date('Y') }} - Adverts</p>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
