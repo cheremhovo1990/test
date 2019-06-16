@@ -79,6 +79,7 @@
 </header>
 <main class="app-content py-3">
     <div class="container">
+        @yield('breadcrumbs')
         @yield('content')
     </div>
     </main>
