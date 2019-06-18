@@ -16,4 +16,6 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/verify/{token}', 'Auth\RegisterController@varfiy')->name('register.verify');
+
 Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet');
