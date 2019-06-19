@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 /**
  * Class LoginController
@@ -13,25 +16,7 @@ use Illuminate\Http\Request;
  */
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/cabinet';
+    use ThrottlesLogins;
 
     /**
      * Create a new controller instance.
@@ -43,41 +28,53 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    /**
-     * @param $token
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function verify($token)
+    public function showLoginForm()
     {
-        if (!$user = User::where('verify_token', $token)->first()) {
-            return redirect()->route('login')
-                ->with('error', 'Sorry your link cannot be identified.');
-        }
-
-        if ($user->status !== User::STATUS_WAIT) {
-            return redirect()->route('login')
-                ->with('error', 'Your email is already verified.');
-        }
-
-        $user->status = User::STATUS_ACTIVE;
-        $user->verify_token = null;
-        $user->save();
-
-        return redirect()->route('login')
-            ->with('success', 'Your e-mail is verified. You can login.');
+        return view('auth.login');
     }
 
-    /**
-     * @param Request $request
-     * @param $user
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function authenticated(Request $request, $user)
+    public function login(Request $request)
     {
-        if ($user->status !== User::STATUS_ACTIVE) {
-            $this->guard()->logout();
-            return back()->with('error', 'You need to confirm your account. Please check your email.');
+        $this->validate($request, [
+            'email' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+            $this->sendLockoutResponse($request);
         }
-        return redirect()->intended($this->redirectPath());
+
+        $authenticate = Auth::attempt(
+            $request->only(['email', 'password']),
+            $request->filled('remember')
+        );
+
+        if ($authenticate) {
+            $request->session()->regenerate();
+            $this->clearLoginAttempts($request);
+            $user = Auth::user();
+            if ($user->status !== User::STATUS_ACTIVE) {
+                Auth::logout();
+                return back()->with('error', 'You need to confirm your account.Please check your email.');
+            }
+            return redirect()->intended(route('cabinet'));
+        }
+
+        $this->incrementLoginAttempts($request);
+
+        throw ValidationException::withMessages(['email' => [trans('auth.failed')]]);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::guard()->logout();
+        $request->session()->invalidate();
+        return redirect()->route('home');
+    }
+
+    protected function username()
+    {
+        return 'email';
     }
 }
