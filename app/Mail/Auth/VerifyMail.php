@@ -22,7 +22,7 @@ class VerifyMail extends Mailable
     /**
      * @var User
      */
-    private $user;
+    public $user;
 
     public function __construct(User $user)
     {

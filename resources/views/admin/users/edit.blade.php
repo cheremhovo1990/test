@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('admin.users._nab')
+    @include('admin.users._nav')
     <form method="POST" action="{{route('admin.users.update', $user)}}">
         @csrf
         @method('PUT')

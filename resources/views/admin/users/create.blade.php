@@ -14,7 +14,7 @@
         </div>
         <div class="form-group">
             <label for="email" class="col-form-label">E-Mail Address</label>
-            <input id="email" type="email" content="form-control{{$errors->has('email')?' is-invalid' : ''}}"
+            <input id="email" type="email" class="form-control{{$errors->has('email')?' is-invalid' : ''}}"
                    name="email" value="{{old('email')}}" required>
             @if ($errors->has('email'))
                 <span class="invalid-feedback"><strong>{{$errors->first('email')}}</strong></span>
