@@ -15,12 +15,26 @@ use App\Entity\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\CreateRequest;
 use App\Http\Requests\Users\UpdateRequest;
+use App\UseCases\RegisterService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
+    /**
+     * @var RegisterService
+     */
+    private $register;
+
+    public function __construct(
+        RegisterService $register
+    )
+    {
+        $this->register = $register;
+    }
+
+
     public function index()
     {
         $users = User::orderByDesc('id')->paginate(20);
@@ -70,7 +84,7 @@ class UsersController extends Controller
 
     public function verify(User $user)
     {
-        $user->verify();
+        $this->register->verify($user->id);
 
         return redirect()->route('admin.users.show', $user);
     }
