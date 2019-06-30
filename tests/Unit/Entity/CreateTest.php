@@ -13,6 +13,7 @@ namespace Tests\Unit\Entity;
 
 use App\Entity\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use phpDocumentor\Reflection\Types\Self_;
 use Tests\TestCase;
 
 class CreateTest extends TestCase
@@ -33,5 +34,6 @@ class CreateTest extends TestCase
         self::assertNotEmpty($user->password);
 
         self::assertTrue($user->isActive());
+        self::assertFalse($user->isAdmin());
     }
 }
