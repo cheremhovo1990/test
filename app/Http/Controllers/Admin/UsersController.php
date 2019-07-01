@@ -65,12 +65,21 @@ class UsersController extends Controller
             User::STATUS_ACTIVE => 'Active',
         ];
 
-        return view('admin.users.edit', compact('user', 'statuses'));
+        $roles = [
+            User::ROLE_USER,
+            User::ROLE_ADMIN,
+        ];
+
+        return view('admin.users.edit', compact('user', 'statuses', 'roles'));
     }
 
     public function update(UpdateRequest $request, User $user)
     {
         $user->update($request->only(['name', 'email']));
+
+        if ($request['role'] !== $user->role) {
+            $user->changeRole($request['role']);
+        }
 
         return redirect()->route('admin.users.show', $user);
     }
