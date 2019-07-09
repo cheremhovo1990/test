@@ -30,4 +30,6 @@ Route::group([
     Route::resource('users', 'UsersController');
     Route::post('/users/{user}/verify', 'UsersController@verify')
         ->name('users.verify');
+
+    Route::resource('regions', 'RegionController');
 });

@@ -17,8 +17,6 @@ use App\Http\Requests\Users\CreateRequest;
 use App\Http\Requests\Users\UpdateRequest;
 use App\UseCases\RegisterService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
@@ -92,17 +90,13 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
-        $statuses = [
-            User::STATUS_WAIT => 'Waiting',
-            User::STATUS_ACTIVE => 'Active',
-        ];
 
         $roles = [
             User::ROLE_USER,
             User::ROLE_ADMIN,
         ];
 
-        return view('admin.users.edit', compact('user', 'statuses', 'roles'));
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     public function update(UpdateRequest $request, User $user)
