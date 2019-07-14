@@ -1,5 +1,6 @@
 <?php
 
+use App\Entity\Adverts\Category;
 use App\Entity\Region;
 use App\Entity\User;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator as Crumbs;
@@ -99,9 +100,16 @@ Breadcrumbs::register('admin.adverts.categories.create', function (Crumbs $crumb
     $crumbs->push('Create', route('admin.adverts.categories.create'));
 });
 
-//Breadcrumbs::register('admin.adverts.categories.show', function (Crumbs $crumbs, Category $));
+Breadcrumbs::register('admin.adverts.categories.show', function (Crumbs $crumbs, Category $category) {
+    if ($parent = $category->parent) {
+        $crumbs->parent('admin.adverts.categories.show', $parent);
+    } else {
+        $crumbs->parent('admin.adverts.categories.index');
+    }
+    $crumbs->push($category->name, route('admin.adverts.categories.index', $category));
+});
 
-Breadcrumbs::register('admin.adverts.categories.edit', function (Crumbs $crumbs, Region $region) {
-    $crumbs->parent('admin.adverts.categories.show', $region);
-    $crumbs->push('Edit', route('admin.adverts.categories.edit'));
+Breadcrumbs::register('admin.adverts.categories.edit', function (Crumbs $crumbs, Category $category) {
+    $crumbs->parent('admin.adverts.categories.show', $category);
+    $crumbs->push('Edit', route('admin.adverts.categories.edit', $category));
 });

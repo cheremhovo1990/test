@@ -13,7 +13,8 @@
         "laravel/framework": "5.8.*",
         "laravel/tinker": "^1.0",
         "predis/predis": "^1.1",
-        "davejamesmiller/laravel-breadcrumbs": "^5.0"
+        "davejamesmiller/laravel-breadcrumbs": "^5.0",
+        "kalnoy/nestedset": "^4.3"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
