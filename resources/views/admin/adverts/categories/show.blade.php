@@ -31,7 +31,7 @@
     <p><a href="{{route('admin.adverts.categories.attributes.create', $category)}}" class="btn btn-success">Add
             Attribute</a></p>
 
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered">
         <thead>
         <tr>
             <th>Sort</th>
@@ -41,7 +41,29 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($attributes as $attribute)
+
+        <tr>
+            <th colspan="4">Parent attribute</th>
+        </tr>
+
+        @foreach($parentAttributes as $attribute)
+            <tr>
+                <td>{{$attribute->sort}}</td>
+                <td>{{$attribute->name}}</td>
+                <td>{{$attribute->type}}</td>
+                <td>{{$attribute->required ? 'Yes': ''}}</td>
+            </tr>
+            @empty
+                <tr>
+                    <td colspan="4">None</td>
+                </tr>
+                @endforeach
+
+                <tr>
+                    <th colspan="4">Own attributes</th>
+                </tr>
+
+                @foreach($attributes as $attribute)
             <tr>
                 <td>{{$attribute->sort}}</td>
                 <td>
@@ -50,6 +72,10 @@
                 <td>{{$attribute->type}}</td>
                 <td>{{$attribute->required ? 'Yes' : 'no'}}</td>
             </tr>
+            @empty
+                <tr>
+                    <td colspan="4">None</td>
+                </tr>
         @endforeach
         </tbody>
     </table>

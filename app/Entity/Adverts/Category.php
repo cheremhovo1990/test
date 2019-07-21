@@ -17,6 +17,7 @@ use Kalnoy\Nestedset\NodeTrait;
 /**
  * Class Category
  * @package App\Entity\Adverts
+ * @property Category $parent
  */
 class Category extends Model
 {
@@ -36,6 +37,22 @@ class Category extends Model
      * @var array
      */
     protected $fillable = ['name', 'slug', 'parent_id'];
+
+    /**
+     * @return array
+     */
+    public function parentAttributes(): array
+    {
+        return $this->parent ? $this->parent->allAttributes() : [];
+    }
+
+    /**
+     * @return array
+     */
+    public function allAttributes(): array
+    {
+        return array_merge($this->parentAttributes(), $this->attributes()->orderBy('sort')->getModels());
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
