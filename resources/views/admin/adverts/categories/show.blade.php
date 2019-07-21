@@ -46,7 +46,7 @@
             <th colspan="4">Parent attribute</th>
         </tr>
 
-        @foreach($parentAttributes as $attribute)
+        @forelse($parentAttributes as $attribute)
             <tr>
                 <td>{{$attribute->sort}}</td>
                 <td>{{$attribute->name}}</td>
@@ -54,16 +54,16 @@
                 <td>{{$attribute->required ? 'Yes': ''}}</td>
             </tr>
             @empty
-                <tr>
-                    <td colspan="4">None</td>
-                </tr>
-                @endforeach
+            <tr>
+                <td colspan="4">None</td>
+            </tr>
+        @endforelse
 
-                <tr>
-                    <th colspan="4">Own attributes</th>
-                </tr>
+        <tr>
+            <th colspan="4">Own attributes</th>
+        </tr>
 
-                @foreach($attributes as $attribute)
+        @forelse($attributes as $attribute)
             <tr>
                 <td>{{$attribute->sort}}</td>
                 <td>
@@ -73,10 +73,10 @@
                 <td>{{$attribute->required ? 'Yes' : 'no'}}</td>
             </tr>
             @empty
-                <tr>
-                    <td colspan="4">None</td>
-                </tr>
-        @endforeach
+            <tr>
+                <td colspan="4">None</td>
+            </tr>
+        @endforelse
         </tbody>
     </table>
 @endsection

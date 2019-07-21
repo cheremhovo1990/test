@@ -58,7 +58,7 @@ class RegisterService
             $request['email'],
             $request['password']
         );
-        $this->mailer->to($user->email)->send(new VerifyMail($user));
+        //$this->mailer->to($user->email)->send(new VerifyMail($user));
         $this->dispatcher->dispatch(new Registered($user));
     }
 
@@ -67,7 +67,7 @@ class RegisterService
      */
     public function verify($id)
     {
-        $user = User::findOrEmail($id);
+        $user = User::findOrFail($id);
         $user->verify();
     }
 }
