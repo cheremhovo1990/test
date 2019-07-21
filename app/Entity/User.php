@@ -12,6 +12,7 @@ use phpDocumentor\Reflection\Types\Self_;
  * Class User
  * @package App
  * @property $status
+ * @property $last_name
  * @property $role
  * @property $name
  * @property $email

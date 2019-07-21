@@ -20,6 +20,7 @@ services:
         links:
             - mysql
             - redis
+        user: "1000"
         environment:
             - "DB_PORT=3306"
             - "DB_HOST=mysql"
@@ -34,6 +35,7 @@ services:
         links:
             - mysql
             - redis
+        user: "1000"
         environment:
             - "DB_PORT=3306"
             - "DB_HOST=mysql"
