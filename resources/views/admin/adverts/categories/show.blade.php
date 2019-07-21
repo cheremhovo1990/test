@@ -36,14 +36,14 @@
         <tr>
             <th>Sort</th>
             <th>Name</th>
-            <th>Slug</th>
+            <th>Type</th>
             <th>Required</th>
         </tr>
         </thead>
         <tbody>
         @foreach($attributes as $attribute)
             <tr>
-                <td>{{$attriube->sort}}</td>
+                <td>{{$attribute->sort}}</td>
                 <td>
                     <a href="{{route('admin.adverts.categories.attributes.show', [$category, $attribute])}}">{{$attribute->name}}</a>
                 </td>

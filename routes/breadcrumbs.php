@@ -129,5 +129,5 @@ Breadcrumbs::register('admin.adverts.categories.attributes.show', function (Crum
 
 Breadcrumbs::register('admin.adverts.categories.attributes.edit', function (Crumbs $crumbs, Category $category, Attribute $attribute) {
     $crumbs->parent('admin.adverts.categories.attributes.show', $category, $attribute);
-    $crumbs->push('Edit', route('admin.adverts.categories.attributes.edit'));
+    $crumbs->push('Edit', route('admin.adverts.categories.attributes.edit', [$category, $attribute]));
 });

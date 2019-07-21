@@ -17,7 +17,7 @@
             <tr>
                 <td>
                     @for ($i=0; $i < $category->depth; $i++) &mdash; @endfor
-                    <a href="{{route('admin.adverts.categories.show')}}">{{$category->name}}</a>
+                    <a href="{{route('admin.adverts.categories.show', $category)}}">{{$category->name}}</a>
                 </td>
                 <td>{{$category->slug}}</td>
                 <td>
@@ -33,12 +33,12 @@
                             <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-double-up"></span>
                             </button>
                         </form>
-                        <form method="POST" action="{{route('admin.adverts.categories.down')}}" class="mr-1">
+                        <form method="POST" action="{{route('admin.adverts.categories.down', $category)}}" class="mr-1">
                             @csrf
                             <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-down"></span>
                             </button>
                         </form>
-                        <form method="POST" action="{{route('admin.adverts.categories.last')}}">
+                        <form method="POST" action="{{route('admin.adverts.categories.last', $category)}}">
                             @csrf
                             <button class="btn btn-sm btn-outline-primary"><span class="fa fa-angle-double-down"></span>
                             </button>

@@ -2,7 +2,7 @@
 
 @section('content')
     @include('admin.adverts.categories._nav')
-    <form method="POST" action="{{route('admin.adverts.categories.attributes.store')}}">
+    <form method="POST" action="{{route('admin.adverts.categories.attributes.store', $category)}}">
         @csrf
         <div class="form-group">
             <label for="name" class="col-form-label">Name</label>

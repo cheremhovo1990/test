@@ -35,7 +35,7 @@ Route::group([
 
     Route::group(['prefix' => 'adverts', 'as' => 'adverts.', 'namespace' => 'Adverts'], function () {
         Route::resource('categories', 'CategoryController');
-        Route::group(['prefix' => 'categories/{category}', 'as' => 'categories'], function () {
+        Route::group(['prefix' => 'categories/{category}', 'as' => 'categories.'], function () {
             Route::post('/first', 'CategoryController@fisrt')->name('first');
             Route::post('/up', 'CategoryController@up')->name('up');
             Route::post('/down', 'CategoryController@down')->name('down');

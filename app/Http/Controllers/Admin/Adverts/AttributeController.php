@@ -41,6 +41,7 @@ class AttributeController extends Controller
             'type' => $request['type'],
             'required' => (bool)$request['required'],
             'variants' => array_map('trim', preg_split('#[\r\n]#', $request['variants'])),
+            'sort' => $request['sort'],
         ]);
 
         return redirect()->route('admin.adverts.categories.attributes.show', [$category, $attribute]);
@@ -48,9 +49,7 @@ class AttributeController extends Controller
 
     public function show(Category $category, Attribute $attribute)
     {
-        $attributes = $category->attributes()->orderBy('sort')->get();
-
-        return view('admin.adverts.categories.attributes.show', compact('category', 'attributes'));
+        return view('admin.adverts.categories.attributes.show', compact('category', 'attribute'));
     }
 
     public function edit(Category $category, Attribute $attribute)
