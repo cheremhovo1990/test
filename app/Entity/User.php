@@ -160,7 +160,7 @@ class User extends Authenticatable
         }
 
         if ($this->phone_verify_token_expire->lt($now)) {
-            throw new \DomainException('Token is expired');
+            throw new \DomainException('Token is expired.');
         }
         $this->phone_verified = true;
         $this->phone_verify_token = null;
