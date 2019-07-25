@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.8.27 on 2019-07-09 03:24:05.
+ * Generated for Laravel 5.8.29 on 2019-07-25 04:02:39.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -12073,6 +12073,19 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
+         * Get a subset of the session data.
+         *
+         * @param array $keys
+         * @return array
+         * @static
+         */
+        public static function only($keys)
+        {
+            /** @var \Illuminate\Session\Store $instance */
+            return $instance->only($keys);
+        }
+
+        /**
          * Checks if a key exists.
          *
          * @param string|array $key
@@ -17062,16 +17075,16 @@ namespace {
         /**
          * Add a "where null" clause to the query.
          *
-         * @param string $column
+         * @param string|array $columns
          * @param string $boolean
          * @param bool $not
          * @return \Illuminate\Database\Query\Builder
          * @static
          */
-        public static function whereNull($column, $boolean = 'and', $not = false)
+        public static function whereNull($columns, $boolean = 'and', $not = false)
         {
             /** @var \Illuminate\Database\Query\Builder $instance */
-            return $instance->whereNull($column, $boolean, $not);
+            return $instance->whereNull($columns, $boolean, $not);
         }
 
         /**
