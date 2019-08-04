@@ -74,6 +74,15 @@ class User extends Authenticatable
         'phone_auth' => 'boolean',
     ];
 
+    public static function rulesList(): array
+    {
+        return [
+            self::ROLE_USER => 'User',
+            self::ROLE_MODERATOR => 'Moderator',
+            self::ROLE_ADMIN => 'Admin',
+        ];
+    }
+
     public static function register(string $name, string $email, string $password): self
     {
         return static::create([
