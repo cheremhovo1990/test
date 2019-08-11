@@ -1,3 +1,7 @@
+<?php
+
+?>
+
 @extends('layouts.app')
 
 @section('content')
@@ -18,7 +22,8 @@
                         <div class="col-md-3">
                             <ul class="list-unstyled">
                                 @foreach($chunk as $current)
-                                    <li><a href="{{route('adverts.index', [$region, $current])}}">{{$current->name}}</a>
+                                    <li>
+                                        <a href="{{route('adverts.index', adverts_path($region, $current))}}">{{$current->name}}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -45,7 +50,7 @@
                             <ul class="list-unstyled">
                                 @foreach($chunk as $current)
                                     <li>
-                                        <a href="{{route('adverts.index', [$current, $category])}}">{{$current->name}}</a>
+                                        <a href="{{route('adverts.index', adverts_path($current, $category))}}">{{$current->name}}</a>
                                     </li>
                                 @endforeach
                             </ul>

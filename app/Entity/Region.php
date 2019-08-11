@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @package App\Entity
  * @property Region $parent
  * @property $name
+ * @property $slug
  *
  * @method Builder roots()
  */
@@ -28,6 +29,11 @@ class Region extends Model
      * @var array
      */
     protected $fillable = ['name', 'slug', 'parent_id'];
+
+    public function getPath(): string
+    {
+        return ($this->parent ? $this->parent->getPath() . '/' : '') . $this->slug;
+    }
 
     public function getAddress(): string
     {
