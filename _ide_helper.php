@@ -3,7 +3,7 @@
 
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.8.29 on 2019-07-25 04:02:39.
+ * Generated for Laravel 5.8.31 on 2019-08-13 02:35:12.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -11,10 +11,10 @@
  * @see https://github.com/barryvdh/laravel-ide-helper
  */
 
-namespace Illuminate\Support\Facades { 
+namespace Illuminate\Support\Facades {
 
     /**
-     * 
+     *
      *
      * @see \Illuminate\Contracts\Foundation\Application
      */
@@ -1262,10 +1262,10 @@ namespace Illuminate\Support\Facades {
          * Finds an entry of the container by its identifier and returns it.
          *
          * @param string $id Identifier of the entry to look for.
-         * @throws NotFoundExceptionInterface  No entry was found for **this** identifier.
-         * @throws ContainerExceptionInterface Error while retrieving the entry.
          * @return mixed Entry.
          * @static
+         * @throws ContainerExceptionInterface Error while retrieving the entry.
+         * @throws NotFoundExceptionInterface  No entry was found for **this** identifier.
          */
         public static function get($id)
         {
@@ -2507,7 +2507,7 @@ namespace Illuminate\Support\Facades {
     /**
      *
      *
-     * @method static \Illuminate\Broadcasting\Broadcasters\Broadcaster channel(string $channel, callable | string $callback)
+     * @method static \Illuminate\Broadcasting\Broadcasters\Broadcaster channel(string $channel, callable|string $callback)
      * @method static mixed auth(\Illuminate\Http\Request $request)
      * @see \Illuminate\Contracts\Broadcasting\Factory
      */
@@ -8357,6 +8357,20 @@ namespace Illuminate\Support\Facades {
             $instance->setDriver($driver);
         }
 
+        /**
+         * Register a custom driver creator Closure.
+         *
+         * @param string $driver
+         * @param \Closure $callback
+         * @return \Illuminate\Redis\RedisManager
+         * @static
+         */
+        public static function extend($driver, $callback)
+        {
+            /** @var \Illuminate\Redis\RedisManager $instance */
+            return $instance->extend($driver, $callback);
+        }
+
     }
 
     /**
@@ -10736,7 +10750,7 @@ namespace Illuminate\Support\Facades {
      *
      * @method static \Illuminate\Routing\RouteRegistrar prefix(string $prefix)
      * @method static \Illuminate\Routing\RouteRegistrar where(array $where)
-     * @method static \Illuminate\Routing\RouteRegistrar middleware(array | string | null $middleware)
+     * @method static \Illuminate\Routing\RouteRegistrar middleware(array|string|null $middleware)
      * @method static \Illuminate\Routing\RouteRegistrar as(string $value)
      * @method static \Illuminate\Routing\RouteRegistrar domain(string $value)
      * @method static \Illuminate\Routing\RouteRegistrar name(string $value)
@@ -15384,7 +15398,6 @@ namespace DaveJamesMiller\Breadcrumbs\Facades {
          *
          * For backwards-compatibility with v5.0.0 and below.
          *
-         * @see self::for()
          * @param string $name The name of the page.
          * @param callable $callback The callback, which should accept a Generator instance as the first parameter and may
          *     accept additional parameters.
@@ -15392,6 +15405,7 @@ namespace DaveJamesMiller\Breadcrumbs\Facades {
          * @throws \DaveJamesMiller\Breadcrumbs\Exceptions\DuplicateBreadcrumbException If the given name has already been
          *     used.
          * @static
+         * @see self::for()
          */
         public static function register($name, $callback)
         {
@@ -18272,13 +18286,13 @@ namespace {
         /**
          * Dump the current SQL and bindings.
          *
-         * @return void
+         * @return \Illuminate\Database\Query\Builder
          * @static
          */
         public static function dump()
         {
             /** @var \Illuminate\Database\Query\Builder $instance */
-            $instance->dump();
+            return $instance->dump();
         }
 
         /**

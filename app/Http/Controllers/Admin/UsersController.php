@@ -20,6 +20,8 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
+
+
     /**
      * @var RegisterService
      */
@@ -30,6 +32,7 @@ class UsersController extends Controller
     )
     {
         $this->register = $register;
+        $this->middleware('can:manage-users');
     }
 
 
