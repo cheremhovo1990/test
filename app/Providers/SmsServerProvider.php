@@ -21,7 +21,7 @@ class SmsServerProvider extends ServiceProvider
 
             switch ($config['driver']) {
                 case 'sms.ru':
-                    $params = $config['divers']['sms.ru'];
+                    $params = $config['drivers']['sms.ru'];
                     if (!empty($params['url'])) {
                         return new SmsRu($params['app_id'], $params['url']);
                     }
